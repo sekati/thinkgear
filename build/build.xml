@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- *************************************************************************************
+		SEKATI SVNStage Buildfile v3.3.0
+		
+		Oct 8, 2010 - jason m horwitz | Sekati LLC | sekati.com
+		
+		Released under the MIT License: http://www.opensource.org/licenses/mit-license.php
+		
+		@info	Eclipse Users: you *must* run this Buildfile in the same JRE as the workspace. To configure
+		        this: Run -> External Tools -> JRE -> Run in the same JRE as the workspace.
+		        
+		@warn   Eclipse Users: you *must* manually add the jar files in build/0 to your External Tool 
+				Configuration Classpath in order to have functional deployment (this is not needed via
+				CLI due to the auto-installation are part of verify environment.
+		        
+     ************************************************************************************* -->
+
+<project name="SK-ThinkGearAPI" default="build" basedir="../">
+
+	
+	<!-- PROPERTIES -->
+	<property name="BUILD_NAME" 			value="SK-ThinkGear API Buildfile" />
+	<property name="BUILD_VERSION" 			value="1.0.0" />
+	
+	
+	<!-- Paths -->
+	<property name="TEMP_DIR" 				value="/tmp" />		
+	<property name="SYSTEM_BIN" 			value="/usr/bin" />
+	<property name="BIN" 					value="/bin" />
+	<!--
+	<property name="FLEX_HOME"				value="/Applications/inde2/sdks/flex_sdk_4.5.0.20967" />
+	-->
+	<property name="FLEX_HOME"				value="/Applications/inde/plugins/com.powerflasher.fdt.shippedflex_3.2.0.3958_0001/flex" />	
+	<property name="ASDOC_DIR"				value="${FLEX_HOME}/asdoc" />	
+	
+	<!-- SDK's (Optional) -->
+	
+	
+	<!-- Resources -->
+	
+	
+	<!-- Binaries -->
+	<property name="rsync.exe" 				value="${SYSTEM_BIN}/rsync" />
+	<property name="ssh.exe" 				value="${SYSTEM_BIN}/ssh" />
+	<property name="asdoc.exe" 				value="${FLEX_HOME}/bin/asdoc" />
+	<property name="asdoc.tmpl" 			value="${ASDOC_DIR}/templates" />
+	<property name="asdoc.img" 				value="${asdoc.tmpl}/images" />
+		
+	
+	<!-- Project Structure -->
+	<property name="build.dir" 				value="${basedir}/build" />
+	<property name="deploy.dir" 			value="${basedir}/deploy" />
+	<property name="docs.dir" 				value="${basedir}/docs" />
+	<property name="lib.dir" 				value="${basedir}/lib" />	
+	<property name="src.dir" 				value="${basedir}/src" />
+	<property name="tests.dir" 				value="${basedir}/tests" />
+		
+	
+	<!-- Project Deployment from SVN: Stage & Production: use trailing slashes on paths & install SSH key on server. -->
+	
+	<!-- svn stage deploy -->
+	<property name="svnstage.user" 			value="deploy" />
+	<property name="svnstage.host" 			value="charlie.sekati.com" />
+	<property name="svnstage.prodhost" 		value="bravo.sekati.com" />
+	<property name="svnstage.remotescript" 	value="/home/deploy/svnstage/svnstage" />	
+	<property name="svnstage.deployprofile" value="thinkgear-bci" />
+	
+	
+	<!-- Documentation -->
+	<property name="doc.asdoc.title" 			value="Sekati ThinkGear API" />
+	<property name="doc.asdoc.footer" 			value="Copyright &#169; 2010 jason m horwitz, Sekati LLC. All Rights Reserved." />
+	<property name="doc.asdoc.exclude.tweener" 	value="caurina.transitions.AuxFunctions,caurina.transitions.Equations,caurina.transitions.PropertyInfoObj,caurina.transitions.SpecialProperty,caurina.transitions.SpecialPropertyModifier,caurina.transitions.SpecialPropertySplitter,caurina.transitions.Tweener,caurina.transitions.TweenListObj,caurina.transitions.properties.ColorShortcuts,caurina.transitions.properties.CurveModifiers,caurina.transitions.properties.DisplayShortcuts,caurina.transitions.properties.FilterShortcuts,caurina.transitions.properties.SoundShortcuts,caurina.transitions.properties.TextShortcuts," />
+	<property name="doc.asdoc.exclude.misc" 	value="fl.data.SimpleCollectionItem,fl.data.SimpleDataProvider,fl.livepreview.LivePreviewParent,com.blitzagency.xray.logger.Debug,com.blitzagency.xray.logger.Log,com.blitzagency.xray.logger.Logger,com.blitzagency.xray.logger.XrayLog,com.blitzagency.xray.logger.XrayLogger,com.blitzagency.xray.logger.events.DebugDispatcher,com.blitzagency.xray.logger.events.DebugEvent,com.blitzagency.xray.logger.util.ObjectTools,com.blitzagency.xray.logger.util.PropertyTools,com.blitzagency.xray.util.LSOUserPreferences" />
+	<property name="doc.asdoc.excludes" 		value="${doc.asdoc.exclude.tweener}${doc.asdoc.exclude.misc}" />
+
+	
+	
+	<!-- **************************************************************** 
+		 CUSTOMIZE BEGINS 
+		 **************************************************************** -->
+
+
+	<target name="build" description="Default Project Build"  depends="-verify-environment">
+		<echo>****************************************************************</echo>
+		<echo>${BUILD_NAME} ${BUILD_VERSION}</echo>
+		<echo>${FLEX_HOME}</echo>
+		<exec executable="ant" failonerror="true">
+			<arg line ="-version" />
+		</exec>
+		<echo>****************************************************************</echo>
+	</target>
+		
+
+
+	<!-- **************************************************************** 
+		 CUSTOMIZE ENDS
+		 **************************************************************** -->
+
+
+
+	<!-- *************************************************************************************
+		 							INTERNAL TARGETS BELOW			        
+	     ************************************************************************************* -->	
+	
+	<!-- DOCUMENTATION -->
+	
+	<target name="doc-asdoc" description="Generate AS3 Documention from the src.dir using ASDoc">
+		<echo>FDTKit Generating ASDoc Documentation -> ${src.dir}</echo>
+		<exec executable="${asdoc.exe}" failonerror="false">
+			<arg line ="-source-path ${src.dir}" />
+			<arg line='-doc-sources ${src.dir}/.'/>
+			<arg line='-external-library-path "${lib.dir}/sekati.swc"' />
+			<arg line='-external-library-path "${lib.dir}/tweener.swc"' />
+			<arg line='-external-library-path "${lib.dir}/as3corelib.swc"' />			
+			<!--
+			<arg line='-warnings=${doc.asdoc.warnings}'/>
+		    <arg line="-footer ${doc.asdoc.footer}"/>
+			<arg line="-window-title ${doc.asdoc.title}"/>
+			<arg line="-main-title ${doc.asdoc.title}"/>
+			<arg line="-templates-path '${asdoc.tmpl}'"/>
+			<arg line='-exclude-classes=${doc.asdoc.excludes}'/>
+			-->
+			<arg line='-output ${docs.dir}'/>
+		</exec>
+		<copy todir="${docs.dir}/images">
+		  <fileset dir="${asdoc.img}" excludes="**/.svn"/>
+		</copy>
+	</target>
+	
+	<!-- DEPLOYMENT -->
+	
+	<target name="deploy-stage" description="Deploy SVN trunk/deploy to Staging server."  depends="-verify-environment">
+		<antcall target="build" />
+		<exec executable="${ssh.exe}">
+			<arg value="${svnstage.user}@${svnstage.host}" />
+			<arg value="${svnstage.remotescript}" />
+			<arg value="${svnstage.deployprofile}" />			
+		</exec>
+	</target>		
+	
+	<!-- MISCELLANY -->
+	
+	
+
+	<!-- INTERNAL TARGETS -->
+	
+	<target name="-verify-environment">		
+		<fail unless="deploy.dir">The "deploy.dir" property must be set in build/build.properties.</fail>
+	</target>
+
+</project>

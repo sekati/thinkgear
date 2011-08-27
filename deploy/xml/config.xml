@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	Built with:
+   ____    ____    __  __   ______  ______  ______      ______  ____    ______     
+  /\  _`\ /\  _`\ /\ \/\ \ /\  _  \/\__  _\/\__  _\    /\  _  \/\  _`\ /\__  _\    
+  \ \,\L\_\ \ \L\_\ \ \/'/'\ \ \L\ \/_/\ \/\/_/\ \/    \ \ \L\ \ \ \L\ \/_/\ \/    
+   \/_\__ \\ \  _\L\ \ , <  \ \  __ \ \ \ \   \ \ \     \ \  __ \ \ ,__/  \ \ \    
+     /\ \L\ \ \ \L\ \ \ \\`\ \ \ \/\ \ \ \ \   \_\ \__   \ \ \/\ \ \ \/    \_\ \__ 
+     \ `\____\ \____/\ \_\ \_\\ \_\ \_\ \ \_\  /\_____\   \ \_\ \_\ \_\    /\_____\
+      \/_____/\/___/  \/_/\/_/ \/_/\/_/  \/_/  \/_____/    \/_/\/_/\/_/    \/_____/
+      
+    http://sekati.googlecode.com | Please leave this notice intact.
+ 	Copyright (c) 2008-2010 Jason M Horwitz | Sekati LLC | sekati.com. All Rights Reserved.
+-->
+<config persist="true">
+
+	<!--
+		APP is implemented to report the API Application SWF name and version
+		number.
+	-->
+	<app>
+		<name>Sekati ThinkGear BCI</name>
+		<version>1.1.0</version>
+	</app>
+
+	<!--
+		PRELOAD is used by the (optional) DocumentPreloader SWF (though the
+		same config.xml is shared with API Application SWF).
+	-->
+	<preload>
+		<application>sekati_main.swf</application>
+	</preload>
+
+	<!--
+		URI is used by the API Application SWF to define the loading of
+		supported externals during the bootstrap process.
+	-->
+	<uri>
+		<crossdomain load="true">crossdomain.xml</crossdomain>
+		<data load="false">xml/data.xml</data>
+		<css load="false">css/app_style.css</css>
+	</uri>
+
+	<!--
+		OPTION is used by the API Application SWF to configure manager
+		settings during bootstrap process.
+	-->
+	<option>
+		<!--
+			Logger has 4 output modes: IDE, FIREBUG, ALL, NONE.
+		-->
+		<log target="ALL">false</log>
+		<menu verbose="true">true</menu>
+		<fullscreen>true</fullscreen>
+		<track>false</track>
+		<deeplink>false</deeplink>
+		<performance_monitor>false</performance_monitor>
+	</option>
+
+	<!--
+		CUSTOM is used by the API Application SWF to persist custom
+		configuration data as an alternative to the "uri.data" load
+		options. To make the custom node data accessible (via
+		"App.db.config.custom") you must set <config persist="true">.
+	-->
+	<custom>
+		<thinkgear>
+			<!-- display raw EEG output from the api connector -->
+			<debug_connector>false</debug_connector>
+			<!-- spinup screen UI -->
+			<spinup>
+				<delay>1000</delay>
+				<caption>Establishing BCI : TGC Connectivity</caption>
+				<error>BCI : TGC Shutdown: Abort, Retry, Fail?</error>
+				<spinner>
+					<amount>10</amount>
+					<radius>10</radius>
+					<size>2</size>
+					<colors>0x00fffff,0xffffff</colors>				
+				</spinner>
+				<copy>
+					<font>Helvetica,Arial,_sans</font>
+					<bold>true</bold>
+					<size>9</size>
+					<color>0xffffff</color>
+					<alpha>0.25</alpha>
+				</copy>
+			</spinup>
+			<!-- header UI -->
+			<header>
+				<caption>SEKATI BCI </caption>
+				<copy>
+					<font>Helvetica,Arial,_sans</font>
+					<bold>true</bold>
+					<size>9</size>
+					<leading>4</leading>
+					<xy>5</xy>
+					<color>0xcccccc</color>
+					<sub_color>0x999999</sub_color>
+					<title_color>0xededed</title_color>
+					<alpha>0.65</alpha>
+				</copy>
+			</header>
+			<!-- Ball Visualization UI -->
+			<ball>
+				<size>25</size>
+				<modulate>3</modulate>
+				<alpha>0.6</alpha>
+				<alpha_high>0.9</alpha_high>
+				<color>0x00ffff</color>
+				<gradient>
+					<angle>45</angle>
+					<blur>10</blur>
+					<strength>2</strength>
+					<distance>0</distance>
+				</gradient>
+			</ball>
+			<!-- BCI signal meter UI -->
+			<signal_meter>
+				<alpha>0.5</alpha>
+				<color>0xffffff</color>
+				<spinner>
+					<amount>7</amount>
+					<radius>5</radius>
+					<size>1.5</size>
+					<colors>0xff0000,0xff00ff</colors>	
+					<x>12</x>
+					<y>-2.5</y>			
+				</spinner>				
+			</signal_meter>
+			<!-- esense logic -->
+			<esense>
+				<!-- decimal precision to display of EEG powers -->
+				<float_precision>2</float_precision>
+				<!-- threshold at which we respond to data & difficulty increment size -->
+				<threshold>
+					<baseline>60</baseline>
+					<increment>5</increment>
+				</threshold>
+				<!-- esense meter value ranges & interpretation -->
+				<meter>
+					<none>
+						<min>0</min>
+						<max>0</max>
+						<name>No Signal</name>
+						<alpha>0.5</alpha>
+					</none>
+					<lowest>
+						<min>1</min>
+						<max>19</max>
+						<name>Lowered</name>
+						<alpha>0.10</alpha>
+					</lowest>
+					<low>
+						<min>20</min>
+						<max>39</max>
+						<name>Reduced</name>
+						<alpha>0.25</alpha>					
+					</low>
+					<medium>
+						<min>40</min>
+						<max>59</max>
+						<name>Neutral</name>
+						<alpha>0.5</alpha>						
+					</medium>
+					<high>
+						<min>60</min>
+						<max>79</max>
+						<name>Raised</name>
+						<alpha>0.75</alpha>											
+					</high>
+					<highest>
+						<min>80</min>
+						<max>100</max>
+						<name>Elevated</name>
+						<alpha>1</alpha>																
+					</highest>
+				</meter>
+				<!-- attention esense meta -->
+				<attention>
+					<name>Attention</name>
+					<description><![CDATA[The intensity of a user's level of mental "focus" or "attention", such as that which occurs during intense concentration and directed (but stable) mental activity. Distractions, wandering thoughts, lack of focus, or anxiety may lower the Attention meter levels.]]></description>
+					<color>0x99CC33</color>				
+				</attention>
+				<!-- meditation esense meta -->				
+				<meditation>
+					<name>Meditation</name>
+					<description><![CDATA[The the level of a user's mental "calmness" or "relaxation". Meditation is related to reduced activity by the active mental processes in the brain. Distractions, wandering thoughts, anxiety, agitation, and sensory stimuli may lower the Meditation meter levels.]]></description>
+					<color>0x33CCCC</color>				
+				</meditation>
+			</esense>
+			<!-- EEG wave meta -->
+			<wave>
+				<!-- delta -->
+				<delta>
+					<name>Delta</name>
+					<frequency>0-3Hz</frequency>
+					<description><![CDATA[Deep, Dreamless sleep, non-REM sleep, unconscious.]]></description>
+					<color>0xFF0000</color>
+				</delta>
+				<!-- theta -->					
+				<theta>
+					<name>Theta</name>
+					<frequency>4-7Hz</frequency>
+					<description><![CDATA[Intuitive, creative, recall, fantasy, imaginary, dream.]]></description>
+					<color>0xFF9900</color>
+				</theta>					
+				<!-- alpha low -->					
+				<alpha_low>
+					<name>Alpha.L</name>
+					<frequency>8-10Hz</frequency>
+					<description><![CDATA[Relaxed, but not drowsy, tranquil, conscious.]]></description>
+					<color>0xFFFF00</color>
+				</alpha_low>	
+				<!-- alpha high -->										
+				<alpha_high>
+					<name>Alpha.H</name>
+					<frequency>10-12Hz</frequency>
+					<description><![CDATA[Calm, meditative, creative visualization.]]></description>
+					<color>0x00FF00</color>
+				</alpha_high>															
+				<!-- beta low -->					
+				<beta_low>
+					<name>Beta.L</name>
+					<frequency>12-20Hz</frequency>
+					<description><![CDATA[Relaxed, yet focused, integrated. Thinking, aware of self and surroundings.]]></description>
+					<color>0x00FFFF</color>
+				</beta_low>	
+				<!-- beta high -->										
+				<beta_high>
+					<name>Beta.H</name>
+					<frequency>20-30Hz</frequency>
+					<description><![CDATA[Alertness, Agitation.]]></description>
+					<color>0x009900</color>
+				</beta_high>
+				<!-- gamma low -->										
+				<gamma_low>
+					<name>Gamma.L</name>
+					<frequency>30-40Hz</frequency>
+					<description><![CDATA[Motor functions, higher mental activity.]]></description>
+					<color>0x9900FF</color>
+				</gamma_low>					
+				<!-- gamma high -->										
+				<gamma_high>
+					<name>Gamma.H</name>
+					<frequency>40-50Hz</frequency>
+					<description><![CDATA[Perception, alertness, anxiety.]]></description>
+					<color>0xFF00FF</color>
+				</gamma_high>					
+			</wave>			
+		</thinkgear>
+	</custom>
+</config>

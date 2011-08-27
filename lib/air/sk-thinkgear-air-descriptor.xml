@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://ns.adobe.com/air/application/1.5" minimumPatchLevel="1047">
+	<!--  
+		Sekati API AIR Application Descriptor Template 
+		@author		Jason M Horwitz
+		@website	http://sekati.googlecode.com
+		@date		10.30.2009
+		@see 		http://livedocs.adobe.com/flex/3/html/help.html?content=File_formats_1.html
+		@see 		http://www.adobe.com/go/learn_air_1.0_application_descriptor_en
+		@see 		http://labs.mstudio.com/?p=226
+	--> 
+    <id>com.sekati.thinkgear.air.SekatiThinkGearBCI</id>
+    <version>1.1.0</version>
+    <filename>Sekati ThinkGear BCI</filename>
+    <name>Sekati ThinkGear BCI</name>
+    <description>Sekati ThinkGear BCI demostrates the use of the Sekati ThinkGear API with the MindGear Brain Computer Interface Device.</description>
+    <copyright>Copyright © 2010 jason m horwitz, Sekat LLC. All Rights Reserved.</copyright>
+    <initialWindow>
+        <title>Sekati ThinkGear BCI</title>
+        <content>sekati_thinkgear.swf</content>
+        <!-- 
+        <systemChrome>none</systemChrome>
+         -->
+        <systemChrome>standard</systemChrome>
+        <transparent>false</transparent>
+        <visible>true</visible>
+        <minimizable>true</minimizable>
+        <maximizable>true</maximizable>
+        <resizable>true</resizable>
+        <width>1024</width>
+        <height>650</height>
+        <minSize>1024 650</minSize>
+        <maxSize>1920 1080</maxSize>
+		<x>0</x>
+		<y>0</y>
+    </initialWindow> 
+    <installFolder>sekati</installFolder>
+    <programMenuFolder>sekati</programMenuFolder>
+    <icon>
+        <image16x16>icons/icon16.png</image16x16>
+        <image32x32>icons/icon32.png</image32x32>
+        <image48x48>icons/icon48.png</image48x48>
+        <image128x128>icons/icon128.png</image128x128> 
+    </icon>
+    <customUpdateUI>true</customUpdateUI>
+    <allowBrowserInvocation>false</allowBrowserInvocation>
+</application>

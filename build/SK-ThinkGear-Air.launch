@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.powerflasher.fdt.ui.AirReleaseGroup">
+<listAttribute key="ASSET_DIRECTORY_LIST">
+<listEntry value="deploy/xml"/>
+<listEntry value="lib/air/icons"/>
+</listAttribute>
+<listAttribute key="ASSET_FILE_LIST">
+<listEntry value="deploy/sekati_thinkgear.swf &gt; sekati_thinkgear.swf"/>
+</listAttribute>
+<stringAttribute key="CERTIFICATE_CHOOSEN" value="1"/>
+<stringAttribute key="CERTIFICATE_COUNTRY" value="US"/>
+<booleanAttribute key="CERTIFICATE_DISABLE_TIMESTAMP" value="false"/>
+<stringAttribute key="CERTIFICATE_KEY_TYPE" value="0"/>
+<stringAttribute key="CERTIFICATE_NAME" value="Sekati Thinkgear"/>
+<stringAttribute key="CERTIFICATE_O_NAME" value="Sekati LLC"/>
+<stringAttribute key="CERTIFICATE_O_UNIT" value="Sekati"/>
+<stringAttribute key="CERTIFICATE_PASSWORD" value="thinkgear"/>
+<stringAttribute key="CERTIFICATE_PATH" value="lib/air/Sekati Thinkgear.p12"/>
+<stringAttribute key="CERTIFICATE_STORE_PASSWORD" value="thinkgear"/>
+<stringAttribute key="DESCRIPTOR_PATH" value="lib/air/sk-thinkgear-air-descriptor.xml"/>
+<stringAttribute key="OUTPUT" value="deploy/sekati_thinkgear.air"/>
+<stringAttribute key="PROJECT_NAME" value="SK-ThinkGear"/>
+<stringAttribute key="process_factory_id" value="com.powerflasher.fdt.ui.launch.fcsh.ProcessFactory"/>
+</launchConfiguration>
