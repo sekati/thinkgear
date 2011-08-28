@@ -1,5 +1,5 @@
 
-SEKATI Thinkgear BCI (_Brain-Computer Interface_) AS3 API
+Sekati Thinkgear BCI (_Brain-Computer Interface_) AS3 API
 ============================
 
 
