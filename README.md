@@ -12,7 +12,7 @@ Sekati Thinkgear BCI (_Brain-Computer Interface_) AS3 API
 Description
 -------------------------------------
 
-SK Thinkgear is an AS3 framework for working with NeuroSky's Thinkgear EEG Headsets. 
+Sekati Thinkgear is an AS3 framework for working with NeuroSky's Thinkgear EEG Headsets. 
 Thanks to their open architecture BCI (_brain-computer interface_) devices we can 
 easily read raw EEG powers data & parse algorithmic reading abstractions performed 
 by the hardware.
