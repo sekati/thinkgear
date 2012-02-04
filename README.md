@@ -42,7 +42,7 @@ Documentation
 Specific attention has been paid to writing thorough and concise Documentation 
 for the API which is shipped with the repo & hosted for easy reference:
 
-* [http://code.sekati.com/docs/thinkgear/](http://code.sekati.com/docs/thinkgear/)
+* [http://sekati.github.com/thinkgear/](http://sekati.github.com/thinkgear/)
 
   
 Notes
