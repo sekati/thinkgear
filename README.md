@@ -2,13 +2,12 @@
 Sekati Thinkgear BCI (_Brain-Computer Interface_) AS3 API
 ============================
 
-
 * Version: 1.1.0
 * Developer: Jason M Horwitz / Sekati
 * Website: [http://sekati.com](http://sekati.com)
 * Copyright: © 2010-2011 Jason M Horwitz, Sekati LLC.
 
-  
+
 Description
 -------------------------------------
 
@@ -17,7 +16,7 @@ Thanks to their open architecture BCI (_brain-computer interface_) devices we ca
 easily read raw EEG powers data & parse algorithmic reading abstractions performed 
 by the hardware.
 
-  
+
 Requirements
 -------------------------------------
 
@@ -35,7 +34,7 @@ Requirements
 * [AS3CoreLib SWC Library](https://github.com/mikechambers/as3corelib)
 * FDT/Eclipse or Flex/FlashBuilder
 
-  
+
 Documentation
 -------------------------------------
 	
@@ -44,7 +43,7 @@ for the API which is shipped with the repo & hosted for easy reference:
 
 * [http://sekati.github.com/thinkgear/](http://sekati.github.com/thinkgear/)
 
-  
+
 Notes
 -------------------------------------
 
